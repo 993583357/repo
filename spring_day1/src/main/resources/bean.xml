@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+
+    <!--把对象的创建交给spring来管理-->
+    <bean id="user" class="cn.itcast.domain.User">
+        <property name="id" value="18"></property>
+        <property name="password" value="123456"></property>
+        <property name="username" value="zhangsan"></property>
+    </bean>
+    <bean id="dao" class="cn.itcast.dao.impl.DaoImpl"></bean>
+    <bean id="service" class="cn.itcast.service.impl.ServiceImpl"></bean>
+    <bean id="user1" class="cn.itcast.domain.User">
+        <constructor-arg name="id" value="18"></constructor-arg>
+        <constructor-arg name="username" value="zhangsan"></constructor-arg>
+        <constructor-arg name="password" value="456789"></constructor-arg>
+    </bean>
+
+
+
+
+</beans>

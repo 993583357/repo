@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ZhuangZhang/ZhuangZhang.iml" filepath="$PROJECT_DIR$/ZhuangZhang/ZhuangZhang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mbg/mbg.iml" filepath="$PROJECT_DIR$/mbg/mbg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mybatis_day1/mybatis_day1.iml" filepath="$PROJECT_DIR$/mybatis_day1/mybatis_day1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pattern/pattern.iml" filepath="$PROJECT_DIR$/pattern/pattern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_annotation/spring_annotation.iml" filepath="$PROJECT_DIR$/spring_annotation/spring_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_aop/spring_aop.iml" filepath="$PROJECT_DIR$/spring_aop/spring_aop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_day1/spring_day1.iml" filepath="$PROJECT_DIR$/spring_day1/spring_day1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springmvc_day1/springmvc_day1.iml" filepath="$PROJECT_DIR$/springmvc_day1/springmvc_day1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssm/ssm.iml" filepath="$PROJECT_DIR$/ssm/ssm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssm1/ssm1.iml" filepath="$PROJECT_DIR$/ssm1/ssm1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-junit/test-junit.iml" filepath="$PROJECT_DIR$/test-junit/test-junit.iml" />
+    </modules>
+  </component>
+</project>

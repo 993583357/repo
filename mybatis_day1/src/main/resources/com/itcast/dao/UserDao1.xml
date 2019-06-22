@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.dao.Userdao">
+    <resultMap id="userMap" type="user">
+        <id column="id" property="uid"></id>
+        <result column="username" property="username"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="sex" property="sex"></result>
+        <result column="address" property="address"></result>
+        <collection property="account"  ofType="Account">
+            <id column="id" property="id"></id>
+            <result column="uid" property="uid"></result>
+            <result column="money" property="money"></result>
+
+        </collection>
+    </resultMap>
+
+    <resultMap id="accountMap" type="account">
+        <id column="id" property="id"></id>
+        <result column="uid" property="uid"></result>
+        <result column="money" property="money"></result>
+        <association property="user" javaType="User">
+            <id column="id" property="uid"></id>
+            <result column="username" property="username"></result>
+            <result column="birthday" property="birthday"></result>
+            <result column="sex" property="sex"></result>
+            <result column="address" property="address"></result>
+        </association>
+    </resultMap>
+
+    <resultMap id="userAndRoleMap" type="user">
+        <id column="id" property="uid"></id>
+        <result column="username" property="username"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="sex" property="sex"></result>
+        <result column="address" property="address"></result>
+        <collection property="roles" ofType="Role" >
+            <id column="id" property="id"></id>
+            <result column="role_name" property="rName"></result>
+            <result column="role_desc" property="rDesc"></result>
+        </collection>
+    </resultMap>
+
+    <!-- 查询用户的信息和所对应的角色 -->
+    <select id="selectUserAndRole" resultMap="userAndRoleMap">
+        SELECT u.* , r.role_name , r.role_desc FROM role r
+         LEFT JOIN USER_role ur on r.id = ur.rid
+         LEFT JOIN user u ON u.id = ur.uid
+
+    </select>
+
+    <!--查询User的所有信息，并把所对应的账户查询出来-->
+    <select id="selectUserByAccount" resultMap="userMap">
+        select * from user u RIGHT JOIN account a on u.uid = a.id
+    </select>
+    <!-- 查询账户，把有账户的用户查询出来 -->
+    <select id="selectAccount" resultMap="accountMap">
+        SELECT * FROM account a LEFT JOIN USER u on a.uid=u.id
+
+    </select>
+
+    <!--配置查询所有-->
+    <select id="findAll" resultType="User">
+        select * from user
+    </select>
+    <!-- 添加用户 -->
+
+    <insert id="addUser" parameterType="User">
+        <selectKey keyProperty="uid" keyColumn="id" resultType="int" order="AFTER">
+            SELECT Last_insert_id();
+        </selectKey>
+        insert into user (username,address,sex,birthday) VALUES (#{username},#{address},#{sex},#{birthday});
+    </insert>
+
+    <!-- 更新 -->
+    <update id="updateUser" parameterType="User">
+        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id = #{uid}
+    </update>
+
+
+
+    <!-- 删除用户 -->
+    <delete id="deleteUser" parameterType="Integer"  >
+        DELETE FROM user where id = #{uid}
+    </delete>
+
+
+    <!-- 模糊查询用户，多个参数，返回结果集为list -->
+    <select id="selectMore"  resultType="User">
+        select * from user where username like #{username} and address like #{ address}
+    </select>
+
+
+    <!-- 判断用户性别 是男的话 查询住址为北京的  是女的话 查询住址为石家庄的-->
+    <select id="selectBySex" parameterType="User" resultType="user">
+        SELECT * FROM USER
+        <where>
+            <choose>
+                <when test='sex!=null and sex == "男" '>
+                    AND address like '%北京%'
+                </when>
+                <when test='sex!=null and sex == "女" '>
+                    AND address like '%石家庄%'
+                </when>
+                <otherwise>
+                    AND id = 51
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!-- 更新用户的信息，根据用户的id -->
+    <update id="updateUser11" parameterType="user">
+        UPDATE USER
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+        </set>
+        WHERE id = #{id}
+
+    </update>
+
+
+
+</mapper>
